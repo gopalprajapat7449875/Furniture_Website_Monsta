@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+
+
+
+
+
+
+
+.slick-dots li button:before {
+  font-size: 14px !important;
+  color: rgb(254, 252, 252);
+  transition: 0.3s;
+}
+
+.slick-dots li:hover button:before {
+  color: rgb(245, 148, 21);
+  transform: scale(1.1);
+}
+
+
+.slick-dots {
+  bottom: 25px !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.8s ease-in-out;
+}
+
+.slick-prev,
+.slick-next {
+  width: 20px;
+  height: 20px;
+  background: black !important;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  /* position: absolute !important; */
+  z-index: 10;
+}
+
+.slick-next {
+  margin-left: -10px !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background: blue !important;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #ca8a04;
+  box-shadow: 0 0 0 2px rgba(202, 138, 4, 0.2);
+}
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #ce8b17d8; /* Tailwind: amber-500 */
+  border-radius: 8px;
+}
