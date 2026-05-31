@@ -17,6 +17,7 @@ export default function Card({ item, productdata }) {
 
   const [path, setpath] = useState(productdata?._Path)
 
+ 
 
 
   const AddtoCart = (_id) => {

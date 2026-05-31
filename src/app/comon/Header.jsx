@@ -21,6 +21,8 @@ export default function Header({ componydata, category, subcategory }) {
   let token = useSelector((state) => state.userStore.token)
   let news = useSelector((state) => state.Enqurystore.newsletters)
 
+  let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
+  console.log(apibaseurl)
   let contect = useSelector((state) => state.Enqurystore.contect)
   const [scrolled, setScrolled] = useState(false);
   const [open, setopen] = useState(false);
@@ -54,7 +56,6 @@ export default function Header({ componydata, category, subcategory }) {
 
   let Subpath = subcategory._path
 
-  let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
 
   let Componydata = () => {
     axios.get(`${apibaseurl}home/compony`)
@@ -208,7 +209,7 @@ export default function Header({ componydata, category, subcategory }) {
                     className=' hover:text-yellow-600  duration-250 ' >
                     Login / Register
                   </p>
-                </Link> 
+                </Link>
               }
 
             </div>
@@ -216,9 +217,9 @@ export default function Header({ componydata, category, subcategory }) {
           <div className='w-full  bg-white  border-b border-neutral-200'>
 
             <div className='max-w-[1200px] mx-auto py-5  flex   justify-between items-center text-[12px] px-3 md:px-4 text-neutral-800 font-medium'>
-
-              <img className='w-34 ' src={path + data?._logoimg} alt="Monsta" />
-
+              <Link href={'/'}>
+                <img className='w-34 ' src={path + data?._logoimg} alt="Monsta" />
+              </Link>
               <div className='flex gap-4 md:pe-4  items-center  sm:justify-center   '>
 
 
@@ -282,7 +283,7 @@ export default function Header({ componydata, category, subcategory }) {
 
 
 
-                              <div onClick={() => setopacity(true)}  className='py-4  w-43  hover:text-yellow-600  hover:scale-105 px-5 text-center leading-14  '>
+                              <div onClick={() => setopacity(true)} className='py-4  w-43  hover:text-yellow-600  hover:scale-105 px-5 text-center leading-14  '>
                                 <img className='w-[100%] h-25  rounded-2xl shadow-[0px_2px_8px_4px_rgba(202,138,4,0.8)]  ' src={Subpath + sitem._image} alt="db" />
                                 <p className=''> {sitem._SubCategoryName} </p>
 
