@@ -31,7 +31,7 @@ const [data, setdata] = useState(sliderdata.Sliderres)
     <div className="w-full h-[420px] overflow-hidden">
       <Slider {...settings}>
         {data.map((item,i)=>(
-          <div key={i} className="w-full h-[450px]">
+          <div key={i} className="w-full md-h-[450px] lg-h-[520px]">
 
 
             <img
