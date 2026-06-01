@@ -37,7 +37,7 @@ const [data, setdata] = useState(sliderdata.Sliderres)
             <img
               src={path + item._image}
               alt={item._image}
-              className="w-full h-full object-fill  "
+              className="w-full h-full object-cover   "
             />
           </div>
         ))}
