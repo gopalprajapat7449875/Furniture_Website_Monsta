@@ -53,7 +53,7 @@ export default function UpsellProduct({Product}) {
 
 
   );
-  console.log(productdata)
+  
 
   return (
     <>
