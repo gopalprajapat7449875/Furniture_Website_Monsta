@@ -18,14 +18,13 @@ export default function RelatedProduct({ Product, _Slug }) {
 
   );
   let productdata = Product?.productres?.filter(
-    (item) => item._PerentCategory?._CategoryName == cotegory[0]._PerentCategory?._CategoryName
+    (item) => item?._PerentCategory?._CategoryName == cotegory[0]?._PerentCategory?._CategoryName
 
 
 
   );
 
 
-  console.log(productdata)
 
  
   var settings = {

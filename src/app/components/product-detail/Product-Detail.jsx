@@ -96,7 +96,7 @@ export default function ProductDetail({ ProductDetails }) {
                         <span key={item._id}> &nbsp; {item._ColorName + ","}</span>
                     ))} </p>
 
-                    <p className='text-[13px] px-3 flex items-center text-neutral-700 font-semibold py-1'> Material: {data._Material?.map(item => (
+                    <p className='text-[13px] px-3 flex items-center text-neutral-700 font-semibold py-1'> Material: {data?._Material?.map(item => (
                         <span  key={item._id}>   &nbsp; {item._MetarialName + ` `}</span>
                     ))} </p>
 
@@ -112,7 +112,7 @@ export default function ProductDetail({ ProductDetails }) {
 
                 <h4 className='text-2xl text-yellow-600 font-semibold border-b-1 border-neutral-200 py-4 px-2'> Description </h4>
 
-                <p className='text-[12px] text-neutral-500 px-3 font-semibold py-6 '>   {data._Product_Long_Description}.</p>
+                <p className='text-[12px] text-neutral-500 px-3 font-semibold py-6 '>   {data?._Product_Long_Description}.</p>
             </div>
 
         </>
