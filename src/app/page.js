@@ -11,7 +11,8 @@ import TrandingColaction from "./components/home/TrandingColaction.jsx";
 import { Sliderdata, TestimonialData } from "./services/HomeService.js";
 import { Productdata } from "./services/ProductServices.js";
 
-
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 
 

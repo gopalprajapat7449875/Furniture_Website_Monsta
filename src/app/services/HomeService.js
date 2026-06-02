@@ -1,5 +1,4 @@
 import axios from "axios";
-
  let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
  let Sliderdata = () => {
     return axios.get(`${apibaseurl}home/slider`)
