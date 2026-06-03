@@ -5,6 +5,7 @@ import Footer from "./comon/Footer";
 import Mainlayout from "./mainlayout";
 import { Componydata } from "./services/componyServises";
 import { Category, Subcategory } from "./services/HomeService";
+import ScrollToTop from "./comon/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default async function RootLayout({ children }) {
 
           <Header  category={category} subcategory={subcategory} />
           {children}
+          <ScrollToTop/>
           <Footer />
 
         </Mainlayout>

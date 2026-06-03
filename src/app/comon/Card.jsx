@@ -7,6 +7,7 @@ import { addProduct } from '../reduxwork/Cartthunk';
 import { toast, ToastContainer } from 'react-toastify';
 import Link from 'next/link';
 import { addwishlist } from '../reduxwork/WishlistSlice';
+import { redirect } from 'next/navigation';
 
 export default function Card({ item, productdata }) {
 
@@ -17,7 +18,7 @@ export default function Card({ item, productdata }) {
 
   const [path, setpath] = useState(productdata?._Path)
 
- 
+
 
 
   const AddtoCart = (_id) => {
@@ -42,6 +43,9 @@ export default function Card({ item, productdata }) {
     }
     else {
       toast(" Please Login First ")
+      setTimeout(() => {
+        redirect('/login-register')
+      }, [3000])
     }
 
 
@@ -71,8 +75,11 @@ export default function Card({ item, productdata }) {
     }
     else {
       toast(" Please Login First ")
+      setTimeout(() => {
+        redirect('/login-register')
+      }, [3000])
 
-     
+
     }
 
 
@@ -86,7 +93,7 @@ export default function Card({ item, productdata }) {
 
   return (
     <>
-
+      <ToastContainer />
       <div className="mx-auto  md:mx-0 w-70 h-100 mb-8 bg-white rounded-2xl shadow-md hover:shadow-yellow-600  duration-200 transition duration-300 overflow-hidden font-serif">
 
         {/* Image */}

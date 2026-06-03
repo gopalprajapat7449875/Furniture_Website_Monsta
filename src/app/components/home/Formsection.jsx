@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import Cookies from 'js-cookie'
 import { toast, ToastContainer } from 'react-toastify';
 import { AddNewsletter } from '@/app/reduxwork/EnqurySlice';
+import { redirect } from 'next/navigation';
 export default function Formsection() {
 let dispatch =useDispatch()
 const token = Cookies.get("token");
@@ -22,6 +23,9 @@ if(token){
 }
 else{
 toast("Please Login first")
+ setTimeout(() => {
+        redirect('/login-register')
+      }, [3000])
 
 }
 
