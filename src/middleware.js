@@ -18,10 +18,16 @@ export function middleware(request) {
       return NextResponse.redirect(new URL("/login-register", request.url));
     }
   }
+   if (pathname.startsWith("/checkout")) {
+    if (!token) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/login-register", "/login-user"],
+  matcher: ["/login-register", "/login-user","/checkout"],
 };
