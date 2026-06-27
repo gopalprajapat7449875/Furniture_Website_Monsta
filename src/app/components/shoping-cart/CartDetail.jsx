@@ -13,44 +13,29 @@ import Link from 'next/link'
 
 import { Orderslice, setorderdata } from '@/app/reduxwork/OrderSlice'
 
-export default function CartDetail({componydata}) {
+export default function CartDetail({ componydata }) {
   const token = Cookies.get("token");
-
   const router = useRouter();
-
-
   let cart = useSelector((store) => store.CartStore.cartdata)
-
-
-
   const [data, setdata] = useState(cart?.cartres)
   const [path, setpath] = useState(cart?._Path)
   const [CartItem, setCartItems] = useState([])
-  const [coupan, setCoupan] = useState('')
+  const [coupan, setCoupan] = useState("")
   const [dis, setdis] = useState(0)
   const [delevery, setdelevery] = useState(0)
-
-let discountcoupan=componydata?.componydata[0]?._ComponyOfferCoupan;
-let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
+  let discountcoupan = componydata?.componydata[0]?._ComponyOfferCoupan;
+  let discountpercentage = componydata?.componydata[0]?._ComponyDisOffer
 
   let dispatch = useDispatch()
 
   let cartlenght = cart?.cartres.length
-
-
-  // console.log(data)
-
   let updatenewcart = (e) => {
-
     e.preventDefault()
     dispatch(UpdateCart(CartItem));
-
   }
-
   const handleQuantityChange = (id, qty) => {
     setCartItems((prev) => {
       const exist = prev.find((item) => item.id === id);
-
       if (exist) {
         // update quantity
         return prev.map((item) =>
@@ -62,28 +47,20 @@ let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
       }
     });
   };
-
   let totalPrice = cart?.cartres?.reduce((acc, item) => {
     return acc + item._ProductPrice;
   }, 0);
-
-
   let checkcoupan = (e) => {
     e.preventDefault()
     if (coupan == discountcoupan) {
-
       setdis(totalPrice * discountpercentage / 100)
-      toast(" Coupan Aplly sucsecc")
-      setCoupan('')
-   
-
+      toast(" Coupan Aplly sucseccfully")
+      setCoupan(discountcoupan)
     }
     else {
       toast("Envalid Coupan")
     }
-
   }
-
   useEffect(() => {
     if (totalPrice && totalPrice >= "20000") {
 
@@ -92,50 +69,32 @@ let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
     else if (totalPrice && totalPrice <= "20000") {
       setdelevery(2000)
     }
-
   }, [totalPrice])
-
   let orderdata = {
     cart: cart?.cartres,
-
     discount: dis,
     delevery: delevery
   }
   let checkout = () => {
-
-
     if (cartlenght == 0) {
       toast("Please Add Cart product")
     }
     else if (token) {
-
-
       dispatch(setorderdata(orderdata));
       router.push("/checkout")
-
     }
     else {
       router.push("/login-register")
     }
   }
-
-
   let Delete = (_id) => {
     dispatch(DeleteCartItem(_id));
   }
-
-
-
-
-
-
-
   return (
     <>
       <ToastContainer />
       <div className=" max-w-[1200px] mx-auto   ">
         <div className="overflow-x-auto">
-
           <form onSubmit={updatenewcart} action="submit">
             <table className="min-w-full text-[15px]  rounded-lg">
               <thead className="bg-neutral-100 border-b-2 border-yellow-600 font-serif">
@@ -148,7 +107,6 @@ let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
                   <th className="py-3 px-4 text-center">Quantity</th>
 
                   <th className="py-3 px-4 text-center">Total</th>
-
                 </tr>
               </thead>
               <tbody className=" ">
@@ -160,7 +118,6 @@ let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
                       <RiDeleteBin5Line onClick={() => Delete(item._id)} className='hover:text-yellow-600 my-auto  duration-300 cursor-pointer ' />
 
                     </td>
-
                     <td className="py-3 px-4 w-65 h-40 text-center  border-x-1 border-neutral-200 ">
                       <Link href={`/product-details/${item._Product_Slug}`}>
                         <img className="object-center w-full h-full " src={cart?._Path + item._ProductImage} alt="furniture" />
@@ -169,28 +126,19 @@ let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
                     <td className="py-3 px-4 text-center  border-r-1 border-neutral-200 text-[13px] font-sans font-semibold "> {item._ProductName} </td>
                     <td className="py-3 px-4 text-center  border-r-1 border-neutral-200 "><span> Rs. {item._ProductPrice
                     }</span></td>
-
                     <td className="py-3 px-4 text-center  border-r-1 border-neutral-200 flex gap-3 font-semibold font-serif text-[14px] justify-center items-center"> <p>Quantity </p> <input min={1} name='_Quantity' onChange={(e) =>
                       handleQuantityChange(item._ProductID, parseInt(e.target.value))
                     } defaultValue={item._Quantity} className='w-15 rounded outline-none py-1 border-neutral-200 border' type="number" /> </td>
                     <td className="py-3 px-4 text-center"><span> Rs. {item._ProductPrice} </span></td>
-
                   </tr>
                 ))) : (<tr>
                   <td
                     colSpan="5"
-                    className="text-4xl text-neutral-500 text-center py-10"
-                  >
-                    Your Cart is Empty
-                  </td>
+                    className="text-4xl text-neutral-500 text-center py-10">
+                     Your Cart is Empty  
+                  </td>                   
                 </tr>)}
-
-
-
-
               </tbody>
-
-
             </table>
             <div className='flex justify-end border-1 border-neutral-200 py-2 px-4'>
               <button type='submit' className='py-2 px-4 uppercase outline-none bg-neutral-950  hover:bg-yellow-600 cursor-pointer text-[11px] duration-500 text-white font-bold rounded'>
