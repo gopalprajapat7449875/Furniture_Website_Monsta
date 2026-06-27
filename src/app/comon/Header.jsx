@@ -22,7 +22,7 @@ export default function Header({ componydata, category, subcategory }) {
   let news = useSelector((state) => state.Enqurystore.newsletters)
 
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
-  console.log(apibaseurl)
+ 
   let contect = useSelector((state) => state.Enqurystore.contect)
   const [scrolled, setScrolled] = useState(false);
   const [open, setopen] = useState(false);

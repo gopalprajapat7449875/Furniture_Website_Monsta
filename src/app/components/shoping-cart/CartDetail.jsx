@@ -13,8 +13,7 @@ import Link from 'next/link'
 
 import { Orderslice, setorderdata } from '@/app/reduxwork/OrderSlice'
 
-export default function CartDetail() {
-
+export default function CartDetail({componydata}) {
   const token = Cookies.get("token");
 
   const router = useRouter();
@@ -27,12 +26,12 @@ export default function CartDetail() {
   const [data, setdata] = useState(cart?.cartres)
   const [path, setpath] = useState(cart?._Path)
   const [CartItem, setCartItems] = useState([])
-  const [coupan, setCoupan] = useState("")
+  const [coupan, setCoupan] = useState('')
   const [dis, setdis] = useState(0)
   const [delevery, setdelevery] = useState(0)
 
-
-
+let discountcoupan=componydata?.componydata[0]?._ComponyOfferCoupan;
+let discountpercentage=componydata?.componydata[0]?._ComponyDisOffer
 
   let dispatch = useDispatch()
 
@@ -71,10 +70,12 @@ export default function CartDetail() {
 
   let checkcoupan = (e) => {
     e.preventDefault()
-    if (coupan == "JAAN") {
+    if (coupan == discountcoupan) {
 
-      setdis(totalPrice * 10 / 100)
+      setdis(totalPrice * discountpercentage / 100)
       toast(" Coupan Aplly sucsecc")
+      setCoupan('')
+   
 
     }
     else {
@@ -223,8 +224,8 @@ export default function CartDetail() {
             <h1 className='text-xl font-serif bg-neutral-950 uppercase text-white font-semibold py-2 px-4 upercase' >Cart Totals</h1>
 
             <div className='flex justify-between py-3 px-3 text-neutral-950 font-bold text-[16px]'><p className='text-[14px]'>Subtotal</p><span> Rs. {totalPrice} </span> </div>
-            <div className='flex justify-between py-3 px-3 text-neutral-950 font-bold text-[16px]'><p className='text-[14px]'>Discount (-)</p><span> Rs. {dis} </span> </div>
-            <div className='flex justify-between py-3 px-3 text-neutral-950 font-bold text-[16px]'><p className='text-[14px]'>Delevery Charges (-)</p><span> Rs. {delevery} </span> </div>
+            <div className='flex justify-between py-3 px-3 text-neutral-950 font-bold text-[16px]'><p className='text-[14px]'>Discount </p><span>  Rs. -{dis} </span> </div>
+            <div className='flex justify-between py-3 px-3 text-neutral-950 font-bold text-[16px]'><p className='text-[14px]'>Delevery Charges </p><span>Rs.  + {delevery} </span> </div>
             <div className='flex justify-between py-3 px-3 text-neutral-950 font-bold text-[16px]'><p className='text-[14px]'>Total</p><span> Rs. {(totalPrice - dis) + (delevery)} </span> </div>
             <div className='py-4 px-4 flex justify-end  items-center'>
 
