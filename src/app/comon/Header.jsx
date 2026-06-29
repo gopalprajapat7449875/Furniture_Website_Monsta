@@ -22,7 +22,7 @@ export default function Header({ componydata, category, subcategory }) {
   let news = useSelector((state) => state.Enqurystore.newsletters)
 
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
- 
+
   let contect = useSelector((state) => state.Enqurystore.contect)
   const [scrolled, setScrolled] = useState(false);
   const [open, setopen] = useState(false);
@@ -70,10 +70,14 @@ export default function Header({ componydata, category, subcategory }) {
     Componydata()
   }, [])
 
- let dispatch = useDispatch()
+  let dispatch = useDispatch()
   let HendelLogout = () => {
     logout(logOut())
-    dispatch(fetchCart())
+
+    if (!token) {
+      dispatch(fetchCart())
+
+    }
 
     redirect('/')
   }
@@ -88,7 +92,7 @@ export default function Header({ componydata, category, subcategory }) {
 
   }, [])
 
- 
+
 
   useEffect(() => {
     if (token) {
@@ -111,7 +115,7 @@ export default function Header({ componydata, category, subcategory }) {
     if (Deletew?._status) {
       toast.success(Deletew?._message)
       dispatch(fetchwish())
-    } 
+    }
     else if (Deletew?._status === false) {
       toast.error("Something Went Wrong")
     }
