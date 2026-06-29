@@ -70,7 +70,7 @@ export default function Header({ componydata, category, subcategory }) {
     Componydata()
   }, [])
 
-
+ let dispatch = useDispatch()
   let HendelLogout = () => {
     logout(logOut())
     dispatch(fetchCart())
@@ -88,7 +88,7 @@ export default function Header({ componydata, category, subcategory }) {
 
   }, [])
 
-  let dispatch = useDispatch()
+ 
 
   useEffect(() => {
     if (token) {
