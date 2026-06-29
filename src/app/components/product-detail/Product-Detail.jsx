@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux';
 import Slider from 'react-slick'
 import Cookies from 'js-cookie'
 import { toast, ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 export default function ProductDetail({ ProductDetails }) {
-
+let redirect = useRouter
     const settings = {
 
 
@@ -45,6 +46,8 @@ export default function ProductDetail({ ProductDetails }) {
     }
     else{
          toast(" Please Login First ")  
+         redirect('/login-register')
+
     }
 
   
