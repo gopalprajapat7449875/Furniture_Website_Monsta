@@ -73,6 +73,8 @@ export default function Header({ componydata, category, subcategory }) {
 
   let HendelLogout = () => {
     logout(logOut())
+    dispatch(fetchCart())
+
     redirect('/')
   }
   useEffect(() => {
