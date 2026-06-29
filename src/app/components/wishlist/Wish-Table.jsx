@@ -10,8 +10,9 @@ import { toast, ToastContainer } from 'react-toastify'
 export default function WishTable() {
     let dispatch = useDispatch()
     let token = Cookies.get('token')
+    const [isloding, setisloding] = useState(false)
 
-
+     let Add = useSelector((store) => store.CartStore.add)
 
     let wishlist = useSelector((store) => store.Wishliststore.wishdata)
 
@@ -23,20 +24,22 @@ export default function WishTable() {
 
     }, [token])
 
-    const AddtoCart = (_id) => {
+    const AddtoCart = (item) => {
 
 
 
         const newProduct = {
-            _ProductID: data?._id,
-            _ProductName: data?._ProductName,
-            _ProductPrice: data?._Product_Discount_Price,
+            _ProductID: item?._id,
+            _ProductName: item?._ProductName,
+            _ProductPrice: item?._ProductPrice,
             _Quantity: 1,
-            _ProductImage: data?._image,
+            _Product_Slug: item?._Product_Slug,
+            _ProductImage: item?._ProductImage,
 
         };
         if (token) {
             dispatch(addProduct(newProduct));
+            setisloding(true)
 
 
         }
@@ -45,11 +48,17 @@ export default function WishTable() {
         }
     }
 
-     let Delete = (_id) => {
+    useEffect(() => {
+
+ setisloding(false)
+
+    }, [Add])
+
+    let Delete = (_id) => {
         dispatch(DeleteItem(_id));
-      }
-    
-    
+    }
+
+
     return (
         <>
             <ToastContainer />
@@ -90,9 +99,11 @@ export default function WishTable() {
                                         }</span></td>
 
 
-                                        <td className="py-3 px-4 text-center">  <button onClick={() => AddtoCart(data._id)} className='text-[13px] bg-yellow-600 font-bold text-white duration-500 hover:bg-neutral-900 cursor-pointer rounded my-3 mx-2 px-15 py-2'>
-                                            Add to Cart
-                                        </button></td>
+                                        <td className="py-3 px-4 text-center">
+                                            <button onClick={() => AddtoCart(item)} className= 'text-[13px] bg-yellow-600 font-bold text-white duration-500 hover:bg-neutral-900 cursor-pointer rounded my-3 mx-2 px-15 py-2 ' disabled={isloding?'disabled':''}>
+                                              {isloding?'LODING...':'Add to Cart'}  
+                                            </button>
+                                        </td>
 
                                     </tr>
                                 )

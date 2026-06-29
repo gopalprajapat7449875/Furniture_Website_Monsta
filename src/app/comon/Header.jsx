@@ -109,7 +109,7 @@ export default function Header({ componydata, category, subcategory }) {
     if (Deletew?._status) {
       toast.success(Deletew?._message)
       dispatch(fetchwish())
-    }
+    } 
     else if (Deletew?._status === false) {
       toast.error("Something Went Wrong")
     }

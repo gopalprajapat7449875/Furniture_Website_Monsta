@@ -4,49 +4,52 @@ import { setToken } from '@/app/reduxwork/UserSlice'
 import axios from 'axios'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast, ToastContainer } from 'react-toastify'
 
 export default function CheckoutForm() {
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
-let dispatch=useDispatch()
+  let dispatch = useDispatch()
+  const [isloding, setisloding] = useState(false)
+  const [islodinglogin, setislodinglogin] = useState(false)
+  let Loginruser = (e) => {
+    e.preventDefault()
+    setislodinglogin(true)
+    let data = {
 
-  let Loginruser=(e)=>{
-       e.preventDefault()
-        let data = {
-   
-        _UserEmail: e.target._UserEmail.value,
-        _UserPassword: e.target._UserPassword.value,
-      }
-      axios.post(`${apibaseurl}user/login`, data)
-        .then((res) => res.data)
-        .then((finalres) => {
-       
-          if (finalres._status) {
-            toast.success(finalres._Message)
-            
-             dispatch(setToken(finalres.token) )
-            redirect('/login-user')
-          }
-          else if(finalres._status===false){
-              toast.error(finalres._Message)
-          }
-          else{
-             finalres.erre.forEach((item) => {
-              Object.values(item).forEach((msg) => {
-                toast.error(msg);
-              });
+      _UserEmail: e.target._UserEmail.value,
+      _UserPassword: e.target._UserPassword.value,
+    }
+    axios.post(`${apibaseurl}user/login`, data)
+      .then((res) => res.data)
+      .then((finalres) => {
+        setislodinglogin(false)
+        if (finalres._status) {
+          toast.success(finalres._Message)
+
+          dispatch(setToken(finalres.token))
+          redirect('/login-user')
+        }
+        else if (finalres._status === false) {
+          toast.error(finalres._Message)
+        }
+        else {
+          finalres.erre.forEach((item) => {
+            Object.values(item).forEach((msg) => {
+              toast.error(msg);
             });
-          }
-          
+          });
+        }
 
-          
-        })
+
+
+      })
 
   }
   let Resisteruser = (e) => {
     e.preventDefault()
+    setisloding(true)
     let password = e.target._UserPassword.value
     let cunfurm = e.target.confurm_Password.value
     if (password == cunfurm) {
@@ -60,28 +63,29 @@ let dispatch=useDispatch()
       axios.post(`${apibaseurl}user/create`, data)
         .then((res) => res.data)
         .then((finalres) => {
-       
+          setisloding(false)
           if (finalres._status) {
             toast.success(finalres._Message)
           }
-          else{
-             finalres.erre.forEach((item) => {
+          else {
+            finalres.erre.forEach((item) => {
               Object.values(item).forEach((msg) => {
                 toast.error(msg);
               });
             });
           }
-          
 
-          
+
+
         })
-        
+
 
 
 
     }
     else {
       toast.error('Confurm password is not match...')
+       setisloding(false)
     }
 
   }
@@ -114,7 +118,7 @@ let dispatch=useDispatch()
                   Password *
                 </label>
                 <input
-                required
+                  required
                   type="password"
                   name='_UserPassword'
                   placeholder="Password"
@@ -123,14 +127,14 @@ let dispatch=useDispatch()
               </div>
 
               <div className="flex justify-between items-center  pt-2">
-               <Link href={'/forgot-password'}> <span className="text-sm text-yellow-700 cursor-pointer">
+                <Link href={'/forgot-password'}> <span className="text-sm text-yellow-700 cursor-pointer">
                   Forget your password?
                 </span>
                 </Link>
-                
 
-                <button type='submit' className="bg-yellow-600 duration-300 cursor-pointer text-[12px] font-semibold text-white px-6 py-2 rounded-full hover:bg-neutral-800">
-                  LOGIN
+
+                <button disabled={islodinglogin?'disabled':''} type='submit' className="bg-yellow-600 duration-300 cursor-pointer text-[12px] font-semibold text-white px-6 py-2 rounded-full hover:bg-neutral-800">
+                  {islodinglogin ? 'LODING...' : 'LOGIN'}
                 </button>
               </div>
             </form>
@@ -148,7 +152,7 @@ let dispatch=useDispatch()
                   Name *
                 </label>
                 <input
-                required
+                  required
                   type="text"
                   placeholder="Enter Name"
                   name='_UserName'
@@ -160,7 +164,7 @@ let dispatch=useDispatch()
                   Phone Number *
                 </label>
                 <input
-                required
+                  required
                   type="text"
                   name='_UserPhoneNumber'
                   placeholder="Enter Phone Number"
@@ -172,7 +176,7 @@ let dispatch=useDispatch()
                   Email address *
                 </label>
                 <input
-                required
+                  required
                   type="email"
                   name='_UserEmail'
                   placeholder="Email Address"
@@ -185,7 +189,7 @@ let dispatch=useDispatch()
                   Password *
                 </label>
                 <input
-                required
+                  required
                   type="password"
                   name='_UserPassword'
                   placeholder="Password"
@@ -197,7 +201,7 @@ let dispatch=useDispatch()
                   Confurm Password *
                 </label>
                 <input
-                required
+                  required
                   type="password"
                   name='confurm_Password'
                   placeholder="cunfurm Password"
@@ -206,8 +210,8 @@ let dispatch=useDispatch()
               </div>
 
               <div className="flex justify-end pt-2">
-                <button type='submit' className="bg-yellow-600 duration-300 cursor-pointer text-[12px] font-semibold text-white px-6 py-2 rounded-full hover:bg-neutral-800">
-                  REGISTER
+                <button type='submit' className="bg-yellow-600 duration-300 cursor-pointer text-[12px] font-semibold text-white px-6 py-2 rounded-full hover:bg-neutral-800"disabled={isloding?'disabled':''} >
+                  {isloding ? 'LODING...' : 'REGISTER'}
                 </button>
               </div>
             </form>

@@ -98,7 +98,7 @@ export default function Footer({ componydata }) {
               My Account
 
             </h5>
-            <p className='text-[13px]  text-neutral-500 py-1 hover:text-yellow-600 hover:cursor-pointer'>  <Link href={'/'} >My Dashboard</Link> </p>
+            <p className='text-[13px]  text-neutral-500 py-1 hover:text-yellow-600 hover:cursor-pointer'>  <Link href={'/login-user'} >My Dashboard</Link> </p>
             <p className='text-[13px]  text-neutral-500 py-1 hover:text-yellow-600 hover:cursor-pointer'  >  <Link href={'/my-wishlist'} >Wishlist</Link> </p>
             <p className='text-[13px]  text-neutral-500 py-1 hover:text-yellow-600 hover:cursor-pointer'> <Link href={'/my-cart'} >Cart </Link>  </p>
 
