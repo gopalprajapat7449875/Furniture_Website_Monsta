@@ -151,7 +151,7 @@ export default function CatagoryContent({ material, color, productdata, type, va
             if (sortType === "6") return priceB - priceA;
 
             return 0;
-        }); console.log(filteredData)
+        });
 
 
 
