@@ -17,7 +17,6 @@ export default function Tabing({ Productdata }) {
 
 
 
-    // console.log(Productdata)
     const [ActiveTab, SetActiveTab] = useState('1');
 
 

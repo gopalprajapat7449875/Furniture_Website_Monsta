@@ -23,20 +23,15 @@ export default function Order_Detials() {
   let dispatch = useDispatch()
   let orderdata = useSelector((store) => store.OrdreStore.orderdata)
   let product = orderdata?.cart
-  console.log(product)
   // let user = useSelector((state) => state.userStore.userdata)
 
-  console.log(user);
   
 
 
   let totalPrice = product?.reduce((acc, item) => {
     return acc + item._ProductPrice;
   }, 0);
-  // useEffect(() => {
-  //   setuser(data)
-  // }, [token])
-
+ 
 
   const [payment, setPayment] = useState(1);
   const [differentAddress, setDifferentAddress] = useState(false);

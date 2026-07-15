@@ -3,8 +3,6 @@
 import React, { useRef, useState } from 'react'
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr'
 import Slider from 'react-slick'
-import './Best.css'
-import Link from 'next/link'
 import { addProduct } from '@/app/reduxwork/Cartthunk'
 import { useDispatch } from 'react-redux'
 import Cookies from 'js-cookie'

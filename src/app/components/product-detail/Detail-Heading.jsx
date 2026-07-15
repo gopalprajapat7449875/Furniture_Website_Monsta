@@ -5,7 +5,6 @@ import { GrFormNext } from 'react-icons/gr'
 
 export default function DetailHeading({ProductDetails}) {
     const [data, setdata] = useState(ProductDetails.productres)
-    console.log(data)
     return (
         <>
             <div className=" max-w-[1200px] mx-auto  text-center ">
