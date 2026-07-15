@@ -7,7 +7,7 @@ export default function WhyChoose() {
 
     const [data, setdata] = useState(null)
     const [path, setpath] = useState('')
-    console.log(data)
+    
 
 
     let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
