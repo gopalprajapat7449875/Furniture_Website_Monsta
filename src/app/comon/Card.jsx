@@ -100,7 +100,7 @@ export default function Card({ item, productdata }) {
         <Link href={`/product-details/${item._Slug}`}>
           <img
             className="w-full h-[50%] hover:scale-107 duration-300 object-cover"
-            src={path + item._image}
+            src={item._image}
             alt={item._ProductName}
           />
         </Link>

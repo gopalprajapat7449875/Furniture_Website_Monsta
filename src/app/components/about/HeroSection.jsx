@@ -7,7 +7,6 @@ import { GrFormNext } from 'react-icons/gr'
 export default function HeroSection() {
     const [data, setdata] = useState(null)
     const [path, setpath] = useState("")
-console.log(data)
 
 
     let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
@@ -19,7 +18,7 @@ console.log(data)
             .then((res) => res.data)
             .then((finalres) => {
                 setdata(finalres.about)
-                setpath(finalres._path)
+                // setpath(finalres._path)
             })
 
     }
@@ -46,7 +45,7 @@ console.log(data)
                 </div>
 
                 <div className='pt-8 pb-3'>
-                    <img src={path+data?._AboutHero} alt='about-hero' />
+                    <img src={data?._AboutHero} alt='about-hero' />
                 </div>
             </div>
 

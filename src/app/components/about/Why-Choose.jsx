@@ -6,7 +6,6 @@ export default function WhyChoose() {
 
 
     const [data, setdata] = useState(null)
-    const [path, setpath] = useState('')
     
 
 
@@ -19,7 +18,6 @@ export default function WhyChoose() {
             .then((res) => res.data)
             .then((finalres) => {
                 setdata(finalres.whychooseres)
-                setpath(finalres._path)
             })
 
     }
@@ -37,7 +35,7 @@ export default function WhyChoose() {
 
 {data?.map((item,i)=>(
  <div className='text-center py-4 px-6'>
-                            <img className='mx-auto ' src= {path+item._image} alt='89df96b6-b70d-463b-affb' />
+                            <img className='mx-auto ' src= {item._image} alt='89df96b6-b70d-463b-affb' />
                             <h6 className='text-[15px] font-serif pt-2'>
                               {item._WhyChooseTital}
 

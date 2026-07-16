@@ -47,7 +47,7 @@ export default function Testimonial({ testimonialdata }) {
                                 {item._TestimonialAbout}
                             </p>
                             <div className="w-22 h-24  rounded-[50%] mt-3 flex items-center justify-center ">
-                                <img className="w-full h-full  object-fill " src={testimonialdata._path + item._image} alt="Kathy" />
+                                <img className="w-full h-full  object-fill " src={item._image} alt="Kathy" />
                             </div>
                             <h6 className="text-[14px] font-serif font-semibold  font-medium py-2 "> {item._TestimonialName}</h6>
                             <p className="text-[12px] font-medium text-neutral-400 "> {item._TestimonialComponiName}</p>

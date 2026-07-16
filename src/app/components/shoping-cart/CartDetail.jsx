@@ -120,7 +120,7 @@ export default function CartDetail({ componydata }) {
                     </td>
                     <td className="py-3 px-4 w-65 h-40 text-center  border-x-1 border-neutral-200 ">
                       <Link href={`/product-details/${item._Product_Slug}`}>
-                        <img className="object-center w-full h-full " src={cart?._Path + item._ProductImage} alt="furniture" />
+                        <img className="object-center w-full h-full " src={item._ProductImage} alt="furniture" />
                       </Link>
                     </td>
                     <td className="py-3 px-4 text-center  border-r-1 border-neutral-200 text-[13px] font-sans font-semibold "> {item._ProductName} </td>

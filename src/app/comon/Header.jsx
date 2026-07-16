@@ -224,7 +224,7 @@ export default function Header({ componydata, category, subcategory }) {
 
             <div className='max-w-[1200px] mx-auto py-5  flex   justify-between items-center text-[12px] px-3 md:px-4 text-neutral-800 font-medium'>
               <Link href={'/'}>
-                <img className='w-34 ' src={path + data?._logoimg} alt="Monsta" />
+                <img className='w-34 ' src={data?._logoimg} alt="Monsta" />
               </Link>
               <div className='flex gap-4 md:pe-4  items-center  sm:justify-center   '>
 
@@ -262,7 +262,7 @@ export default function Header({ componydata, category, subcategory }) {
 
 
               <ul className='flex uppercase justify-center items-center gap-10 text-[12px] font-semibold' >
-                <li className={`max-w-24 ${scrolled ? ' mx-5 block' : 'hidden'}  `}>  <img className='w-full' src={path + data?._logoimg} alt="Monsta" /></li>
+                <li className={`max-w-24 ${scrolled ? ' mx-5 block' : 'hidden'}  `}>  <img className='w-full' src={data?._logoimg} alt="Monsta" /></li>
 
                 <Link href={'/'}>
                   <li className='text-yellow-600 hover:cursor-pointer duration-250 py-5'>Home</li>
@@ -290,7 +290,7 @@ export default function Header({ componydata, category, subcategory }) {
 
 
                               <div onClick={() => setopacity(true)} className='py-4  w-43  hover:text-yellow-600  hover:scale-105 px-5 text-center leading-14  '>
-                                <img className='w-[100%] h-25  rounded-2xl shadow-[0px_2px_8px_4px_rgba(202,138,4,0.8)]  ' src={Subpath + sitem._image} alt="db" />
+                                <img className='w-[100%] h-25  rounded-2xl shadow-[0px_2px_8px_4px_rgba(202,138,4,0.8)]  ' src={sitem._image} alt="db" />
                                 <p className=''> {sitem._SubCategoryName} </p>
 
                               </div>

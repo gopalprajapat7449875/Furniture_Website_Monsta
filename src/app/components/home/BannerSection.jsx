@@ -9,7 +9,7 @@ import axios from 'axios';
 export default function BannerSection({ sliderdata }) {
 
   const [data, setdata] = useState(sliderdata.Sliderres)
-  const [path, setpath] = useState(sliderdata._path)
+  // const [path, setpath] = useState(sliderdata._path)
 
 
   const settings = {
@@ -35,7 +35,7 @@ export default function BannerSection({ sliderdata }) {
 
 
             <img
-              src={path + item._image}
+              src={item._image}
               alt={item._image}
               className="w-full h-[100%] object-cover   "
             />

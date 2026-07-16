@@ -63,13 +63,13 @@ let redirect = useRouter
 
 
                 <div>
-                    <img className='pt-2 rounded-2xl w-[95%] h-[75%]' src={path + image} alt={data?._image} />
+                    <img className='pt-2 rounded-2xl w-[95%] h-[75%]' src={image} alt={data?._image} />
                     <div className=' gap-3 pt-4 slider-container '>
                         <Slider {...settings}>
                             {mainimage.map((img, i) => (
                                 <div key={i} className="px-1">
                                     <img
-                                        src={path + img}
+                                        src={img}
                                         onClick={() => setimage(img)}
                                         className={`w-26 h-24 object-cover rounded-lg cursor-pointer border-2 ${image === img ? "border-blue-500" : "border-gray-200"
                                             }`}

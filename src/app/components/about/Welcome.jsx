@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 export default function Welcome() {
     const [data, setdata] = useState(null)
 
-console.log(data)
 
 
     let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
