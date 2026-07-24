@@ -19,10 +19,10 @@ export default function ProfilePage() {
 
 
 
-      <div className={`  ${full?'flex duration-300 rounded-2xl':'hidden' }  flex justify-center w-full overflow-x-hidden   absolute z-9 `}>
+      <div className={`  ${full?'flex duration-300 rounded-2xl':'hidden' }  flex justify-center w-[90%] overflow-x-hidden   absolute z-9 `}>
 
 <div  onClick={()=>setfull(false)}  className='text-red-800 text-2xl absolute cursor-pointer font-bold'> X</div>
-        <img className='w-110 rounded h-150 overflow-x-hidden' src={path + data?._ProfilePic} alt={data?._ProfilePic} />
+        <img className='w-110 rounded h-150 overflow-x-hidden' src={data?._ProfilePic} alt={data?._ProfilePic} />
 
 
       </div>
@@ -39,7 +39,7 @@ export default function ProfilePage() {
 
 
               <img
-                src={path + data?._ProfilePic}
+                src={data?._ProfilePic}
                 alt="profile"
               onClick={()=>setfull(true)} 
                 className="w-28 h-28 rounded-full object-cover border-4 border-yellow-500"

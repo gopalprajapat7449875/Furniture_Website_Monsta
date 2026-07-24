@@ -15,17 +15,17 @@ export default function UpdateAccount() {
   const [open, setopen] = useState(false)
   const [user, setUser] = useState(null)
   const [orderdata, setorderdata] = useState([])
- 
+
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
 
   let logout = useDispatch()
   let dispatch = useDispatch()
 
- 
+
 
   let token = Cookies.get('token')
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(Userdata(user))
   }, [token])
 
@@ -44,7 +44,7 @@ useEffect(() => {
 
         setUser(finalres.userData)
         dispatch(UserPath(finalres._path))
-
+        dispatch(Userdata(finalres.userData))
 
 
 
@@ -95,7 +95,7 @@ useEffect(() => {
     )
       .then((res) => res.data)
       .then((finalres) => {
-        
+
         setorderdata(finalres.orderres)
 
 
