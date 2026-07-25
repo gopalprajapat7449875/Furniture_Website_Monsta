@@ -93,7 +93,7 @@ export default function Card({ item, productdata }) {
 
   return (
     <>
-      <ToastContainer />
+      
       <div className="mx-auto  md:mx-0 w-70 h-100 mb-8 bg-white rounded-2xl shadow-md hover:shadow-yellow-600  duration-200 transition duration-300 overflow-hidden font-serif">
 
         {/* Image */}
