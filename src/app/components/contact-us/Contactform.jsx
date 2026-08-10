@@ -26,20 +26,13 @@ export default function Contactform() {
       _Phone: e.target._Phone.value,
       _Message: e.target._Message.value,
     }
-    if (token) {
-
+    if (data) {
 
       dispatch(AddContect(data))
       e.target.reset()
     }
     else {
-    
-      toast("Please Login first")
-      setTimeout(() => {
-        redirect('/login-register')
-      }, [3000])
-
-
+      toast("Please fill the form")
     }
 
 
@@ -47,13 +40,7 @@ export default function Contactform() {
   const [data, setdata] = useState(null)
   const [path, setpath] = useState("")
 
-
-
-
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
-
-
-
   let Componydata = () => {
     axios.get(`${apibaseurl}home/compony`)
       .then((res) => res.data)
@@ -99,6 +86,7 @@ export default function Contactform() {
                 type="text"
                 placeholder="Name *"
                 className="w-full border border-gray-300  px-4 py-3 rounded outline-none focus:border-black"
+                required
               />
             </div>
 
@@ -112,6 +100,7 @@ export default function Contactform() {
                 type="email"
                 placeholder="Email *"
                 className="w-full border border-gray-300 px-4 py-3 rounded outline-none focus:border-black"
+                    required
               />
             </div>
 
@@ -121,6 +110,7 @@ export default function Contactform() {
                 Your Mobile Number (required)
               </label>
               <input
+                  required
                 name='_Phone'
                 type="tel"
                 placeholder="Mobile Number *"
@@ -134,6 +124,7 @@ export default function Contactform() {
                 Subject
               </label>
               <input
+                  required
                 name='_Subject'
                 type="text"
                 placeholder="Subject *"
@@ -147,6 +138,7 @@ export default function Contactform() {
                 Your Message
               </label>
               <textarea
+                 required
                 name='_Message'
                 rows="6"
                 placeholder="Message *"
