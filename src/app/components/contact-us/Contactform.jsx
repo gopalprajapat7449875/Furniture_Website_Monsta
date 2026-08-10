@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie'
 import { AddContect } from '@/app/reduxwork/EnqurySlice';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { redirect } from 'next/navigation';
 
 export default function Contactform() {
@@ -56,6 +56,7 @@ export default function Contactform() {
 
   return (
     <>
+    <ToastContainer/>
       <div className=" max-w-[1200px] mx-auto  py-5 grid sm:grid-cols-1 md:grid-cols-2">
 
         <div className='pt-4 px-2'>

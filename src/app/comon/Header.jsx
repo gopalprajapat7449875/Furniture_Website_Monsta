@@ -24,6 +24,7 @@ export default function Header({ componydata, category, subcategory }) {
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
 
   let contect = useSelector((state) => state.Enqurystore.contect)
+ 
   const [scrolled, setScrolled] = useState(false);
   const [open, setopen] = useState(false);
   let logout = useDispatch()

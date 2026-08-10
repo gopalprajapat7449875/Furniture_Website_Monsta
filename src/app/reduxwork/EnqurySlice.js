@@ -13,13 +13,7 @@ export const AddContect = createAsyncThunk(
 
 
 
-        const res = await axios.post(`${apibaseurl}enqury/contect`, contect,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
+        const res = await axios.post(`${apibaseurl}enqury/contect`, contect );
 
 
         return res.data ;
