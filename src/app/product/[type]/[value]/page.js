@@ -4,13 +4,16 @@ import CatagoryContent from '../../../components/catagores/Catagory-Content'
 import { Productdata } from '@/app/services/ProductServices'
 import { Category, Color, Material, Subcategory } from '@/app/services/HomeService'
 
-export default async function product({ params }) {
+export default async function product({ params ,searchParams}) {
+   const query = await searchParams;
+
+  const currentPage = Number(query?.page) || 1;
   let { type, value } = await params
 
  
 
 
-  let data = await Productdata()
+  let data = await Productdata(currentPage,9)
 
 
 

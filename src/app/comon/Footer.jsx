@@ -13,7 +13,7 @@ export default function Footer({ componydata }) {
 
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
 
-
+  
 
   let Componydata = () => {
     axios.get(`${apibaseurl}home/compony`)

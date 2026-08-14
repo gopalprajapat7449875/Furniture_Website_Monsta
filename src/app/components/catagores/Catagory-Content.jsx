@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../../comon/Card'
 import { FaRegHeart } from 'react-icons/fa'
 import { IoIosArrowDown } from 'react-icons/io'
@@ -9,9 +9,12 @@ import Link from 'next/link'
 import Cookies from 'js-cookie'
 import { addProduct } from '@/app/reduxwork/Cartthunk'
 import { addwishlist } from '@/app/reduxwork/WishlistSlice'
-
+import ResponsivePagination from 'react-responsive-pagination';
+import 'react-responsive-pagination/themes/classic-light-dark.css';
+import { useRouter, useSearchParams } from "next/navigation";
 export default function CatagoryContent({ material, color, productdata, type, value, subcategorydata, categorydata }) {
-
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
     let subcategory = value
     const [minPrice, setMinPrice] = useState(0);
@@ -22,11 +25,28 @@ export default function CatagoryContent({ material, color, productdata, type, va
     const [slectedtype, setslectedtype] = useState([]);
     const [sortType, setSortType] = useState("");
     const [side, setside] = useState(false)
+    const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
+    const [totalPages, settotalPages] = useState(1);
+  const [totalrecords, settotalrecords] = useState(productdata._paginate.Total_Records);
+    const currentPagenumber = Number(searchParams.get('page')) || 1;
+    const handlePageChange = (page) => {
 
-    console.log(selectedColor, selectedMaterial
+        setCurrentPage(page);
 
-    )
+        const params = new URLSearchParams(searchParams.toString());
 
+        params.set("page", String(page));
+
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+
+
+        router.push(newUrl);
+    };
+
+    console.log(productdata)
+    useEffect(() => {
+        settotalPages(productdata._paginate.Total_Pages)
+    }, [currentPage])
 
 
     const [filter, setfilter] = useState(false)
@@ -326,7 +346,7 @@ export default function CatagoryContent({ material, color, productdata, type, va
                                                                 }
                                                             }}
                                                             className=' text-[13px] font-medium text-neutral-400 hover:bg-neutral-100  py-2 px-2 rounded  cursor-pointer'
-                                                             value={i + 1}> {v} </li>
+                                                            value={i + 1}> {v} </li>
                                                     ))
                                                 }
 
@@ -340,7 +360,7 @@ export default function CatagoryContent({ material, color, productdata, type, va
 
 
                                     <p>
-                                        Showing {filteredData.length} of {data.length} results
+                                        Showing {filteredData.length} of {totalrecords} results
                                     </p>
 
                                 </div>
@@ -372,7 +392,15 @@ export default function CatagoryContent({ material, color, productdata, type, va
                         </div>
                     </div>
                 )}
+            
             </div>
+                <ResponsivePagination
+                current={currentPage}
+                total={totalPages}
+                onPageChange={handlePageChange}
+            />
+            
+
             {/* <div className=" max-w-[1200px] mx-auto my-8 grid grid-cols-4 ">
 
                 {data.length > 0 ? (<>

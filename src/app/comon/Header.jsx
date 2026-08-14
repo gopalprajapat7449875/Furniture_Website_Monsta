@@ -24,7 +24,7 @@ export default function Header({ componydata, category, subcategory }) {
   let apibaseurl = process.env.NEXT_PUBLIC_APIBASEURL
 
   let contect = useSelector((state) => state.Enqurystore.contect)
- 
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setopen] = useState(false);
   let logout = useDispatch()
@@ -32,7 +32,7 @@ export default function Header({ componydata, category, subcategory }) {
   const [path, setpath] = useState("")
   const [subdata, setsubdata] = useState([])
   const [opacity, setopacity] = useState(false)
-
+  const [mobileActiveCat, setMobileActiveCat] = useState(null);
   let categorydata = category.Categoryres
 
   const slugify = (text) =>
@@ -325,37 +325,89 @@ export default function Header({ componydata, category, subcategory }) {
           </div>
         </div>
 
-        <div onClick={() => setopen(false)} className={`sm:w-55 md:w-70    ${open ? 'translate-x-0' : '-translate-x-[100%]'} duration-500 ease-in-out bg-white fixed  top-0 overflow-y-auto  z-30 h-[100%]`}>
-          <div className='flex justify-end flex-col  w-full  py-8 px-5'>
+        <div className={`sm:w-55 md:w-70 ${open ? 'translate-x-0' : '-translate-x-[100%]'} duration-500 ease-in-out bg-white fixed top-0 overflow-y-auto z-30 h-[100%]`}>
+
+          <div className='flex justify-end flex-col w-full py-8 px-5'>
 
             <div className='flex justify-end items-end'>
-              <div className='flex  sm:w-7 sm:h-7   md:w-9 md:h-9 border-1 border-neutral-300 rounded-[50%]'>
-                <RxCross2 className='sm:text-xl md:text-2xl mx-auto my-auto font-extrabold' onClick={() => setopen(false)} />
+              <div className='flex sm:w-7 sm:h-7 md:w-9 md:h-9 border-1 border-neutral-300 rounded-[50%]'>
+                <RxCross2
+                  className='sm:text-xl md:text-2xl mx-auto my-auto font-extrabold cursor-pointer'
+                  onClick={() => setopen(false)}
+                />
               </div>
-
             </div>
-            <div className='text-center py-4 text-[13px]  text-neutral-600'>
 
-              <p className='pb-4'>Contact us 24/7 :<a href="tel:+919876543210">+919876543210</a> </p>
-              <a href="furnitureinfo@gmailcom">furnitureinfo@gmail.com</a>
+            <div className='text-center py-4 text-[13px] text-neutral-600'>
+              <p className='pb-4'>Contact us 24/7 :<a href="tel:+919876543210">+919876543210</a></p>
+              <a href="mailto:furnitureinfo@gmail.com">furnitureinfo@gmail.com</a>
             </div>
-            <div>
-              <ul className='flex text-neutral-600 flex-col uppercase  text-[13px] font-semibold' >
+
+            <div className='overflow-y-auto max-h-[70vh]'>
+              <ul className='flex text-neutral-600 flex-col uppercase text-[13px] font-semibold'>
 
                 <Link href={'/'}>
-                  <li className=' hover:cursor-pointer duration-250 py-5'>Home</li>
+                  <li onClick={() => setopen(false)} className='hover:cursor-pointer duration-250 py-5 border-b border-neutral-200'>
+                    Home
+                  </li>
                 </Link>
 
-                <li className=' flex border-b border-neutral-200 justify-between items-center py-5 hover:cursor-pointer  group hover:  hover:text-yellow-600 flex items-center gap-2'>living  <FaAngleDown />
+                {categorydata.map((item, i) => (
+                  <li key={i} className='border-b border-neutral-200'>
 
-                </li>
-                <li className=' py-5  border-b border-neutral-200  flex justify-between  items-center hover:cursor-pointer  hover:text-yellow-600 flex items-center gap-2 relative group hover:'> sofa  <FaAngleDown />
+                    {/* category row - click sirf accordion toggle karega, sidebar close nahi */}
+                    <div
+                      onClick={() => {
+                        subcstegoryfilter(item._CategoryName);
+                        setMobileActiveCat(mobileActiveCat === i ? null : i);
+                      }}
+                      className='flex justify-between items-center py-5 hover:cursor-pointer hover:text-yellow-600'
+                    >
+                      {item._CategoryName}
+                      <FaAngleDown className={`duration-300 ${mobileActiveCat === i ? 'rotate-180' : ''}`} />
+                    </div>
 
-                </li>
-                <li className='   py-5  border-b border-neutral-200  flex justify-between  items-center hover:cursor-pointer  flex items-center gap-2  group '>pages  <FaAngleDown />
+                    {/* accordion body - subcategories (text only, no image) */}
+                    <div
+                      className={`overflow-hidden duration-300 ease-in-out ${mobileActiveCat === i ? 'max-h-[1000px] py-2' : 'max-h-0'
+                        }`}
+                    >
+                      <ul className='flex flex-col pl-4 normal-case font-normal'>
+                        {subdata.map((sitem, si) => (
+                          <Link
+                            key={si}
+                            href={`/product/${item._CategoryName
+                              .toLowerCase()
+                              .replaceAll('.', '')
+                              .replaceAll(' ', '-')
+                              .replaceAll('&', '')
+                              .replaceAll('--', '-')
+                              .trim()}/${sitem._SubCategoryName
+                                .toLowerCase()
+                                .replaceAll('.', '')
+                                .replaceAll(' ', '-')
+                                .trim()}`}
+                            onClick={() => setopen(false)}
+                          >
+                            <li className='py-3 text-[13px] text-neutral-500 hover:text-yellow-600 border-b border-neutral-100 last:border-0'>
+                              {sitem._SubCategoryName}
+                            </li>
+                          </Link>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))}
 
+                <li className='py-5 flex justify-between items-center hover:cursor-pointer border-b border-neutral-200'>
+                  pages <FaAngleDown />
                 </li>
-                <li className='  py-5 hover:cursor-pointer  '> <Link href={'/contact-us'}> contact us </Link> </li>
+
+                <li className='py-5 hover:cursor-pointer'>
+                  <Link href={'/contact-us'} onClick={() => setopen(false)}>
+                    contact us
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
